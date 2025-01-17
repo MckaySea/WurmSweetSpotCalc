@@ -103,7 +103,7 @@ const handleInputChange = (event) => {
   return (
     <div className={`relative flex flex-col items-center justify-center h-screen ${theme.background}`}>
 <h1 className={`text-3xl font-bold mt-4 mb-4 ${theme.text} sm:mt-12`}>
-  Sweet Spot Calculator
+  McDoodle's Sweet Spot Calculator
 </h1>
 
       
