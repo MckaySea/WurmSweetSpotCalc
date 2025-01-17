@@ -37,7 +37,7 @@ function App() {
 
     // Add the final point with the exact skill level (floating-point value)
     xValues.push(skillValue);
-    yValues.push(skillValue * 0.77 + 23); // Exact precision for the final point
+    yValues.push(skillValue * 0.77 + 23); // xact precision for the final point
 
     setData({
       labels: xValues,
@@ -55,15 +55,29 @@ function App() {
   };
 
   // Handle input changes
-  const handleInputChange = (event) => {
-    const value = event.target.value;
-    const skillValue = parseFloat(value); // Allow float skill input
-    if (isNaN(skillValue)) return; // If it's not a number, do nothing
-    if (skillValue > 100) return; // Restrict value to a max of 100
+// Handle input changes
+const handleInputChange = (event) => {
+  const value = event.target.value;
 
-    setSkill(value);
-    updateGraph(skillValue);
-  };
+  // If the input is empty, just set skill to an empty string
+  if (value === '') {
+    setSkill('');
+    setSweetSpot(23); // Reset sweet spot to the initial value when input is empty
+    return;
+  }
+
+  // Ensure the input only has up to 5 decimal places
+  const regex = /^\d*\.?\d{0,5}$/;
+  if (!regex.test(value)) return; // Ignore input that doesn't match the regex (more than 5 decimal places)
+
+  const skillValue = parseFloat(value);
+  if (isNaN(skillValue)) return; // Ignore invalid input
+  if (skillValue > 100) return; // Prevent skill value from exceeding 100
+
+  setSkill(value);
+  updateGraph(skillValue);
+};
+
 
   // Toggle dark mode
   const toggleDarkMode = () => {
